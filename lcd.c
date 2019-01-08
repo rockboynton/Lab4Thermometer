@@ -9,6 +9,7 @@
 
 #include <inttypes.h>
 #include <stdio.h>
+#include <stdlib.h>
 
 #include "lcd.h"
 #include "delay.h"
@@ -73,16 +74,9 @@ uint8_t lcd_print_string(char *str_ptr) {
 }
 
 uint32_t lcd_print_num(uint32_t num) {
-    // Write Data Operation: RS = high, RW = low 
-    GPIOC->BSRR = (1 << (RS)) | (1 << (RW + 16)) | (1 << E);
-    GPIOA->ODR = (GPIOA->ODR & (0xFFFFF00F)) | ((num+'0') << 4);
-    // Toggle E 
-    GPIOC->BSRR = (1 << E);
-    delay_1us(1);
-    GPIOC->BSRR = (1 << (E + 16));
-    // GPIOA->BSRR |= (0xFF << DB0); // for check busy flag ---- specified in manual but doesnt work
-    delay_1us(40);
-	return 0;
+    uint8_t numString[2];
+    sprintf(numString, "%d", num);
+	return lcd_print_string(numString);
 }
 
 void lcd_write_instr(uint32_t instr) {
