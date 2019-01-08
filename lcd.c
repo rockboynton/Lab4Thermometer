@@ -22,7 +22,7 @@ static volatile GPIO* GPIOA = 0x40020000;
 
 static const uint8_t LCD_WIDTH = 40;
 
-// File-dcope helper methods
+// File-scope helper methods
 static void lcd_wait_for_not_busy();
 static void lcd_write_instr_not_busy(uint32_t instr);
 static void lcd_print_char(char c);

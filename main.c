@@ -69,7 +69,7 @@ int main() {
 		led_allOff();
 
 		display_temp_bar();
-		
+
 		key = key_getChar();
 		switch (key) {
 			case 'A':
@@ -112,7 +112,7 @@ void display_temp_bar() {
 }
 
 void current_temp_mode() {
-	uint8_t currentTemp;
+	uint16_t currentTemp;
 	lcd_print_string("Current Temp: ");
 	if (fahrenheit) {
 		currentTemp = temp_current_fahrenheit();
@@ -123,8 +123,8 @@ void current_temp_mode() {
 }
 
 void extremes_mode() { 
-	uint8_t maxTemp;
-	uint8_t minTemp;
+	uint16_t maxTemp;
+	uint16_t minTemp;
 	if (fahrenheit) {
 		maxTemp = temp_max_fahrenheit();
 		minTemp = temp_min_fahrenheit();
